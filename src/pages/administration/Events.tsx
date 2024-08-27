@@ -279,6 +279,7 @@ export default function Events() {
                 <Label htmlFor='date_start' className='text-right'>
                   {t('date_initial')}
                 </Label>
+
                 <Input
                   id='date_start'
                   value={formData.date_start}
