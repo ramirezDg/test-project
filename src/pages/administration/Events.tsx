@@ -39,11 +39,12 @@ import {
   SelectValue,
 } from '../../components/ui/select'
 import { useGetEvents } from '../../hooks/useEvents'
+import { EventsProps } from '../../services/eventService'
 
 interface Event {
   name: string
-  startDate: string
-  endDate: string
+  date_start: string
+  date_end: string
   spot: string
   area: string
 }
@@ -53,11 +54,12 @@ export default function Events() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [selectedArea, setSelectedArea] = useState('')
+  const [data, setData] = useState<EventsProps[]>([])
 
   const initialState = {
     name: '',
-    startDate: '',
-    endDate: '',
+    date_start: '',
+    date_end: '',
     spot: '',
     area: '',
   }
@@ -100,6 +102,7 @@ export default function Events() {
   }
 
   /* GetData */
+
   const { events, getEventsData } = useGetEvents()
 
   useEffect(() => {
@@ -112,7 +115,7 @@ export default function Events() {
     }
   }, [events])
 
-  const columns: ColumnDef<Event>[] = [
+  const columns: ColumnDef<EventsProps>[] = [
     {
       accessorKey: 'id',
       header: '',
@@ -125,20 +128,23 @@ export default function Events() {
       header: 'Name',
     },
     {
-      accessorKey: 'startDate',
+      accessorKey: 'date_start',
       header: 'Start Date',
     },
     {
-      accessorKey: 'endDate',
+      accessorKey: 'date_end',
       header: 'End Date',
     },
     {
-      accessorKey: 'spot',
+      accessorKey: 'site.name',
       header: 'Spot',
     },
     {
-      accessorKey: 'area',
+      accessorKey: 'areas',
       header: 'Area',
+      cell: ({ row }) => {
+        return row.original.areas.map(area => area.name).join(', ')
+      },
     },
     {
       accessorKey: 'actions',
@@ -169,8 +175,6 @@ export default function Events() {
       ),
     },
   ]
-
-  const [data, setData] = useState<Event[]>([])
 
   const areas = [
     {
@@ -272,27 +276,27 @@ export default function Events() {
                 />
               </div>
               <div className='grid items-center grid-cols-4 gap-4'>
-                <Label htmlFor='startDate' className='text-right'>
+                <Label htmlFor='date_start' className='text-right'>
                   {t('date_initial')}
                 </Label>
                 <Input
-                  id='startDate'
-                  value={formData.startDate}
+                  id='date_start'
+                  value={formData.date_start}
                   onChange={e =>
-                    setFormData({ ...formData, startDate: e.target.value })
+                    setFormData({ ...formData, date_start: e.target.value })
                   }
                   className='col-span-3'
                 />
               </div>
               <div className='grid items-center grid-cols-4 gap-4'>
-                <Label htmlFor='endDate' className='text-right'>
+                <Label htmlFor='date_end' className='text-right'>
                   {t('date_end')}
                 </Label>
                 <Input
-                  id='endDate'
-                  value={formData.endDate}
+                  id='date_end'
+                  value={formData.date_end}
                   onChange={e =>
-                    setFormData({ ...formData, endDate: e.target.value })
+                    setFormData({ ...formData, date_end: e.target.value })
                   }
                   className='col-span-3'
                 />

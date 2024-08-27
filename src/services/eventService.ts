@@ -10,6 +10,45 @@ export interface Event {
     area: string
   }
 
+ export interface EventsProps {
+    id: string;
+    name: string;
+    description: string;
+    company: Company;
+    date_end: string;
+    date_start: string;
+    areas: Array<{
+      id: string;
+      name: string;
+      eventId: string;
+      deletedAt?: string;
+      sector: {
+        id: number;
+        name: string;
+        deletedAt?: string;
+      };
+      eventAdminAreas: Array<{
+        id: number;
+        id_active: string;
+        admin: {
+          id: string;
+          name: string;
+          last_name: string;
+          identification: string;
+        };
+      }>;
+    }>;
+    site: {
+      id: number;
+      name: string;
+    };
+    deletedAt?: string;
+  }
+  interface Company {
+    id: number;
+    name: string;
+    deletedAt?: string | null;
+  }
   export interface Site {
     id: number;
     name: string;
@@ -36,12 +75,11 @@ export interface Event {
   }
 
 
-  export const getEvents = async (): Promise<ApiResponseAxios<Event[]>> => {
+  export const eventsGet = async (): Promise<EventsProps[]> => {
     try {
-
-      const res = await axiosInstance.post(`${environment.baseUrl}events`);
+      const res = await axiosInstance.get(`${environment.baseUrl}events`);
   
-      if (res.statusText !== 'Created') {
+      if (res.statusText !== 'OK') {
         return res.data;
       }
   
@@ -50,6 +88,7 @@ export interface Event {
       throw error;
     }
   };
+
   export const createEvent = async (props: Props): Promise<ApiResponseAxios<Event[]>> => {
     try {
 

@@ -46,7 +46,7 @@ export const loginUser = async ({
 
   try {
     const res = await axios
-      .post(`${environment.baseUrl}auth/login`, { email, password: pass })
+      .post(`${environment.baseUrl}login/admin`, { email, password: pass })
       .then(response => {
         return response.data
       })
@@ -72,7 +72,7 @@ export const registerUser = async ({
   }
 
   try {
-    const response = await axios.post(`${environment.baseUrl}auth/register`, {
+    const response = await axios.post(`${environment.baseUrl}register`, {
       email,
       password: pass,
     })

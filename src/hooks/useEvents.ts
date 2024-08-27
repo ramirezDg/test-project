@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
-import { createEvent, Props, Event, getEvents} from '../services/eventService';
+import { createEvent, Props, Event, eventsGet, EventsProps} from '../services/eventService';
 import { AxiosError } from 'axios';
 
 
 export const useGetEvents = () => {
-    const [events, setEvents] = useState<Event[] | null>(null);
+    const [events, setEvents] = useState<EventsProps[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<AxiosError |  null | unknown>(null);
   
@@ -12,14 +12,16 @@ export const useGetEvents = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await getEvents();
-        if (response.statusCode === 200) {
+        const response = await eventsGet();
+        console.log(response);
+        setEvents(response);
+        /* if (response.statusCode === 200) {
             setEvents(response.data);
         } else {
           setError(
             { message: response.message, statusCode: response.statusCode }
           );
-        }
+        } */
       } catch (err) {
         console.error('Error:', err);
         setError({ message: 'Error fetching users', statusCode: 500 });

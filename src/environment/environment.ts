@@ -6,5 +6,5 @@ export const environment = {
 
   //baseUrl: 'http://facial.ecored.co:3000/',
   
-  baseUrl: 'https://facial.ayudando.com.co/',
+  baseUrl: 'https://facial.ayudando.com.co:3000/api/',
 }
