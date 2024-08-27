@@ -30,7 +30,7 @@ import {
   CardTitle,
 } from '../../components/ui/card'
 import { DataTable } from '../../components/ui/data-table'
-import { Ticket } from 'lucide-react'
+import { LandPlot } from 'lucide-react'
 
 interface Event {
   name: string
@@ -78,7 +78,7 @@ export default function Events() {
       accessorKey: 'id',
       header: '',
       cell: () => (
-        <Ticket className='object-cover w-10 h-10 rounded-md text-primary' />
+        <LandPlot className='object-cover w-10 h-10 rounded-md text-primary' />
       ),
     },
     {

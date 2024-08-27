@@ -66,7 +66,6 @@ export default function Events() {
   const [formData, setFormData] = useState<Event>(initialState)
 
   const handleSubmit = () => {
-    console.log('Form submitted')
     console.log(formData)
     setIsDialogOpen(false)
     setIsEditing(false)
