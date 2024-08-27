@@ -18,6 +18,12 @@ import Members from './pages/administration/Members'
 import Congregation from './pages/administration/Congregation'
 import Administrators from './pages/administration/Administrators'
 import Visitor from './pages/administration/Visitor'
+import Customers from './pages/admin/Customers'
+import { Charts } from './pages/admin/Charts'
+import Edit from './pages/admin/Edit'
+import New from './pages/admin/New'
+import Products from './pages/admin/Products'
+import Settings from './pages/admin/Settings'
 
 function App() {
   const token = useAuthStore(state => state.token)
@@ -151,7 +157,7 @@ function App() {
             </>
           }
         />
-        {/*   <Route
+        <Route
           path='/products'
           element={
             <>
@@ -192,7 +198,7 @@ function App() {
           element={
             <>
               <PageTitle title={`Analytics | ${PROJECT_NAME}`} />
-              <Analytics 
+
               <Charts />
             </>
           }
@@ -206,7 +212,6 @@ function App() {
             </>
           }
         />
-      */}
       </Route>
       {/* Rutas Publicas */}
       <Route
